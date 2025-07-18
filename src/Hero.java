@@ -1,7 +1,6 @@
 // Hero.java
 public class Hero extends Character {
     private String weapon;
-
     public Hero(String name, int hp, String weapon) {
         super(name, hp);
         this.setWeapon(weapon); // setterを使って初期化
@@ -13,12 +12,9 @@ public class Hero extends Character {
         target.setHp(target.getHp() - 10);
     }
 
-    // weaponのgetter
     public String getWeapon() {
         return weapon;
     }
-
-    // weaponのsetter
     public void setWeapon(String weapon) {
         this.weapon = weapon;
     }

@@ -2,14 +2,14 @@
 public abstract class Monster implements Creature {
     protected String name;
     protected int hp;
-    protected char suffix; // 枝番号
+    protected char suffix;
 
     public Monster(char suffix, int hp) {
         if (hp < 0) {
             throw new IllegalArgumentException("初期設定に誤りがあるため、モンスターを作成できませんでした");
         }
         this.suffix = suffix;
-        setHp(hp); // setHpを使って初期化することで、負の値がセットされないようにする
+        setHp(hp);
     }
 
     @Override
@@ -35,7 +35,7 @@ public abstract class Monster implements Creature {
     @Override
     public void setHp(int hp) {
         if (hp < 0) {
-            this.hp = 0; // HPが0未満にならないようにする
+            this.hp = 0; // HPが0未満にならないようにする じゃないと負の値が出てしまう？とにかくエラー出たから調整。
         } else {
             this.hp = hp;
         }

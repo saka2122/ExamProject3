@@ -3,7 +3,7 @@ public final class Slime extends Monster { // finalキーワードで継承を�
 
     public Slime(char suffix, int hp) {
         super(suffix, hp);
-        this.name = "スライム"; // Monsterクラスのnameフィールドを設定
+        this.name = "スライム";
     }
 
     @Override

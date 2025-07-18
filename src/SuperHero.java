@@ -1,7 +1,6 @@
 // SuperHero.java
 public class SuperHero extends Hero {
 
-    // Heroインスタンスを引数にとるコンストラクタ
     public SuperHero(Hero hero) {
         super(hero.getName(), hero.getHp(), hero.getWeapon());
     }

@@ -1,12 +1,11 @@
-// GameMaster.java
 import java.util.ArrayList;
 
 
 public class GameMaster {
 
     public static void main(String[] args) {
-        // --- 味方パーティ ---
-        System.out.println("--- 味方パーティ ---");
+        // --- 味方パーティ ---の情報を作る。
+        // System.out.println("--- 味方パーティ ---");
         ArrayList<Character> party = new ArrayList<>();
         Hero hero = new Hero("勇者", 100, "剣");//ステを入力
         Wizard wizard = new Wizard("魔法使い", 60, 20); // MPは20
@@ -16,8 +15,8 @@ public class GameMaster {
         party.add(wizard);
         party.add(thief);
 
-        // --- 敵グループ ---
-        System.out.println("--- 敵グループ ---");
+        // --- 敵グループ ---上と同様に作る。
+        //System.out.println("--- 敵グループ ---");
         ArrayList<Monster> monsters = new ArrayList<>();
         Matango matangoA = new Matango('A', 45);
         Goblin goblinA = new Goblin('A', 50);
@@ -27,86 +26,69 @@ public class GameMaster {
         monsters.add(goblinA);
         monsters.add(slimeA);
 
-        // 戦闘開始前ステータス表示
-        System.out.println("\n--- 味方パーティ ---");
+        // 戦闘開始前ステータス表示させる。　なんか改行されない　　解決 改行要らない
+        System.out.println("--- 味方パーティ ---");
         for (Character member : party) {
             member.showStatus();
         }
-        System.out.println("\n--- 敵グループ ---");
+        System.out.println("--- 敵グループ ---");
         for (Monster enemy : monsters) {
             enemy.showStatus();
         }
 
-        // --- 味方の総攻撃！ ---
-        System.out.println("\n味方の総攻撃！ ");
-        // 勇者の攻撃
-        if (hero.isAlive()) {
-            hero.attack(matangoA); // 勇者は剣で攻撃！お化けキノコAに10のダメージを与えた！
-            hero.attack(goblinA); // 勇者は剣で攻撃！ゴブリンAに10のダメージを与えた！
-            hero.attack(slimeA);  // 勇者は剣で攻撃！スライムAに10のダメージを与えた！
+        // 味方の総攻撃　
+        System.out.println("\n味方の総攻撃！");
+        for (Character member : party) {
+            for (Monster enemy : monsters) {
+                member.attack(enemy);
+            }
         }
 
-        // 魔法使いの攻撃
-        if (wizard.isAlive()) {
-            wizard.attack(goblinA); // 魔法使いは火の玉を放った！ゴブリンAに3のダメージを与えた！
-            wizard.attack(goblinA); // 魔法使いは火の玉を放った！ゴブリンAに3のダメージを与えた！
-            wizard.attack(slimeA);  // 魔法使いは火の玉を放った！スライムAに3のダメージを与えた！
+        //  敵の総攻撃
+        System.out.println("\n 敵の総攻撃！");
+        for (Monster enemy : monsters) {
+            for (Character member : party) {
+                enemy.attack(member);
+            }
         }
+//メモーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+//多分ここでクラスを変える。
+        //HeroからSuperHeroにかえる。
+        //Heroの情報をsuperheroに渡さないといけない
 
-        // 盗賊の攻撃
-        if (thief.isAlive()) {
-            thief.attack(matangoA); // 盗賊は素早く攻撃した！お化けキノコAに5のダメージを与えた！
-            thief.attack(goblinA);  // 盗賊は素早く攻撃した！ゴブリンAに5のダメージを与えた！
-            thief.attack(slimeA);   // 盗賊は素早く攻撃した！スライムAに5のダメージを与えた！
-        }
+        //どうするか考える。
 
-        // --- 敵の総攻撃！ ---
-        System.out.println("\n 敵の総攻撃！ ");
-        // お化けキノコAの攻撃
-        if (matangoA.isAlive()) {
-            matangoA.attack(hero);   // お化けキノコAは体当たり攻撃！勇者に6のダメージを与えた！
-            matangoA.attack(wizard); // お化けキノコAは体当たり攻撃！魔法使いに6のダメージを与えた！
-            matangoA.attack(thief);  // お化けキノコAは体当たり攻撃！盗賊に6のダメージを与えた！
-        }
 
-        // ゴブリンAの攻撃
-        if (goblinA.isAlive()) {
-            goblinA.attack(hero);   // ゴブリンAはナイフで切りつけた！勇者に8のダメージを与えた！
-            goblinA.attack(wizard); // ゴブリンAはナイフで切りつけた！魔法使いに8のダメージを与えた！
-            goblinA.attack(thief);  // ゴブリンAはナイフで切りつけた！盗賊に8のダメージを与えた！
-        }
-
-        // スライムAの攻撃
-        if (slimeA.isAlive()) {
-            slimeA.attack(hero);   // スライムAは体当たり攻撃！勇者に5のダメージを与えた！
-            slimeA.attack(wizard); // スライムAは体当たり攻撃！魔法使いに5のダメージを与えた！
-            slimeA.attack(thief);  // スライムAは体当たり攻撃！盗賊に5のダメージを与えた！
-        }
-
-        // --- クラスチェンジイベント ---
-        // 画像では「ダメージを受けた勇者が覚醒した！」の後にヒーローのHPが81
-        // (100 - 6 - 8 - 5 = 81) になっているため、この時点で覚醒メッセージを表示
-        System.out.println("\nダメージを受けた勇者が突然光りだした！"); // このメッセージは画像のタイミングに合わせる
+        System.out.println("\nダメージを受けた勇者が突然光りだした！");
 
         // 勇者のHPが81なので、SuperHeroにクラスチェンジ
-        // Heroインスタンスから SuperHeroインスタンスを生成し、パーティリストのメンバーを入れ替え
-        int heroIndex = party.indexOf(hero);
-        if (heroIndex != -1) {
-            SuperHero superHero = new SuperHero(hero); // HeroインスタンスからSuperHeroを生成
-            party.set(heroIndex, superHero); // パーティリストのHeroをSuperHeroに置き換え
-            System.out.println(superHero.getName() + "はスーパーヒーローに進化した！");
-
-            // クラスチェンジ後の強力な攻撃が実行される
-            // 画像では「勇者は剣で攻撃！お化けキノコに25のダメージを与えた！」「勇者は剣で攻撃！ゴブリンに25のダメージを与えた！」
-            // となっているため、SuperHeroの攻撃対象を固定
-            superHero.attack(matangoA); // スーパーヒーローは剣で攻撃！お化けキノコAに25のダメージを与えた！
-            superHero.attack(goblinA);  // スーパーヒーローは剣で攻撃！ゴブリンAに25のダメージを与えた！
-            superHero.attack(slimeA);
+        // Heroインスタンスから SuperHeroインスタンスを生成し、パーティリストのメンバーを入れ替える。
+        SuperHero superHero = new SuperHero(hero); // HeroインスタンスからSuperHeroを生成するらしいどうゆうことや？ここでヒーロークラスから継承してるのか？// パーティリストのHeroをSuperHeroに置き換え　セットでヒーローの場所にスーパーヒーローをいれる上書きみたいなことかも
+        System.out.println(superHero.getName() + "はスーパーヒーローに進化した！");
+        //スーパーヒーローにならない。
+        //うまくHeroクラスから移行できてない。
+        for (Monster enemy : monsters) {
+            superHero.attack(enemy);
         }
 
-        // --- 戦闘後、両者の最終ステータス ---
+        //戦闘後の両者の最終ステ
         System.out.println("\n--- 味方パーティ 最終ステータス ---");
-        System.out.println("勇者：HP " + hero.getHp()); // SuperHeroになった後も元のHeroインスタンスのHPを参照するように調整
+        System.out.println("勇者：HP " + hero.getHp()); // SuperHeroになった後も元のHeroインスタンスのHPを参照するように調整することでｈｐがうまく出るらしい。
+
+        //ーーーーーーーーここまでのエラーめもーーーーーー
+        //ｈｐが正常に表示されない
+        //勇者のステータスが二回表示される。　色々消してたら治ってた。解決。
+        //仕様書通りの順番で表示されない。　　ＩＦ文の位置変えて解決。
+        //何故かダメージをくらっていない
+        //ｈｐにばらつきがある
+        //死んでいる場合に戦闘不能と表示されない。　　解決。
+        //そもそも、isAlive が違うのかも　　　　解決。
+
+        //new
+        //敵もｈｐがゼロになった時の表示が出ない。　解決。
+
+        //疑問：総攻撃は二重ループにしたが、生存、戦闘不能もFOR文で書くべきなのか
+        //FOＲ文で書こうと思ったができなかったので止めた。
 
         if (hero.isAlive()) {
             System.out.println("生存状態：生存");
@@ -114,8 +96,6 @@ public class GameMaster {
             System.out.println("生存状態：戦闘不能");
         }
 
-     //   Character finalHero = party.get(0);
-     //   finalHero.showStatus(); // 「勇者：HP 81」と表示される
 
        // System.out.println("勇者：HP " + hero.getHp());
         System.out.println("魔法使い：HP " + wizard.getHp());//魔法使いの現在のｈｐを獲得する
@@ -156,5 +136,20 @@ public class GameMaster {
         } else {
             System.out.println("生存状態：討伐済み");
         }
+
+
     }
 }
+
+//めも
+
+//シーフクラスだけは何とか終わった。
+//明後日はほかの人とモンスターのクラスを作る。
+
+//CretureとsuperHero、Heroが全くできない。
+//ゲームマスターの大まかな流れだけ作る。
+
+//諦めて頼る。
+
+//仕様書通りの結果が出るようにはなった。
+//来週仕様書のエラーを試す。

@@ -3,7 +3,7 @@ public class Matango extends Monster {
 
     public Matango(char suffix, int hp) {
         super(suffix, hp);
-        this.name = "お化けキノコ"; // Monsterクラスのnameフィールドを設定
+        this.name = "お化けキノコ";
     }
 
     @Override

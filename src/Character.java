@@ -8,7 +8,7 @@ public abstract class Character implements Creature {
             throw new IllegalArgumentException("初期設定に誤りがあるため、キャラクターを作成できませんでした");
         }
         this.name = name;
-        setHp(hp); // setHpを使って初期化することで、負の値がセットされないようにする
+        setHp(hp);
     }
 
     @Override

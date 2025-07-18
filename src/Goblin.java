@@ -3,7 +3,7 @@ public class Goblin extends Monster {
 
     public Goblin(char suffix, int hp) {
         super(suffix, hp);
-        this.name = "ゴブリン"; // Monsterクラスのnameフィールドを設定
+        this.name = "ゴブリン";
     }
 
     @Override
