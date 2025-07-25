@@ -9,7 +9,7 @@ public abstract class Monster implements Creature {
             throw new IllegalArgumentException("初期設定に誤りがあるため、モンスターを作成できませんでした");
         }
         this.suffix = suffix;
-        setHp(hp);
+        this.setHp(hp);
     }
 
     @Override
@@ -45,7 +45,4 @@ public abstract class Monster implements Creature {
     public char getSuffix() {
         return suffix;
     }
-
-    @Override
-    public abstract void attack(Creature target);
 }

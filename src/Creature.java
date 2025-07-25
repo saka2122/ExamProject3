@@ -1,6 +1,4 @@
-// Creature.java
 public interface Creature {
-
 
     boolean isAlive();
 

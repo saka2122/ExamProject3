@@ -1,45 +1,36 @@
-// Character.java
 public abstract class Character implements Creature {
-    protected String name;
-    protected int hp;
+    private String name;
+    private int hp;
 
     public Character(String name, int hp) {
         if (hp < 0) {
             throw new IllegalArgumentException("初期設定に誤りがあるため、キャラクターを作成できませんでした");
         }
-        this.name = name;
-        setHp(hp);
+        this.setName(name);
+        this.setHp(hp);
     }
 
-    @Override
     public final boolean isAlive() {
-        return this.hp > 0;
+        return hp > 0;
     }
 
-    @Override
     public void showStatus() {
-        System.out.println(this.name + "：HP " + this.hp);
+        System.out.println(getName() + ":HP " + getHp());
     }
 
-    @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 
-    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getHp() {
-        return this.hp;
+        return hp;
     }
 
-    @Override
     public void setHp(int hp) {
-        if (hp < 0) {
-            this.hp = 0; // HPが0未満にならないようにする
-        } else {
-            this.hp = hp;
-        }
+        this.hp = Math.max(0, hp);
     }
-
-    @Override
-    public abstract void attack(Creature target);
 }
